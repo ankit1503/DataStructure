@@ -1,0 +1,31 @@
+class Solution {
+public:
+    int lengthOfLIS(vector<int>& nums) {
+        vector<int>v;
+        int n=nums.size();
+        if(n<=1)
+            return n;
+        v.push_back(nums[0]);
+      
+        for(int i=1;i<n;i++)
+        {
+            int x=nums[i];
+            if(x<v[0])
+            {
+                v[0]=x;
+                continue;
+            }
+            if(x>v[v.size()-1])
+            {
+                v.push_back(x);
+            }
+            else
+            {
+                int j=lower_bound(v.begin(),v.end(),x)-v.begin();
+               
+                   v[j]=x;
+            }
+        }
+        return v.size();
+    }
+};
